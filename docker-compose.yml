@@ -12,8 +12,6 @@ services:
     environment:
       - NODE_TYPE=arbiter
     
-
-
   g1:
     build: .
     image: wxdlong/gluster
@@ -48,7 +46,13 @@ services:
     tty: true
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /usr/local/bin/docker:/usr/local/bin/docker
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - g1
+      - g2
+      - arbiter
+    entrypoint: /usr/local/bin/initGluster.sh
+
     environment:
       - NODE_TYPE=gc
-
-

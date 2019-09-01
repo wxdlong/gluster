@@ -1,5 +1,26 @@
+>故常无，欲以观其妙。 常有，欲以观其徼。 
+此两者同出而异名。 同谓之玄，玄之又玄，众妙之门。
 
+## What
 
+1. gluster server( g1,g2,arbiter ) = 2 replicate + 1 aribter 
+
+2. gluster client = gc
+
+## How
+
+`docker-compose.exe up -d `
+
+```bash
+[root@gc glusterfs]# docker ps
+CONTAINER ID   IMAGE             COMMAND                  CREATED         STATUS          PORTS    NAMES
+34b5d6562fbf   wxdlong/gluster   "/usr/local/bin/init…"   8 minutes ago   Up 8 minutes             gc
+935923b1f297   wxdlong/gluster   "/sbin/init"             8 minutes ago   Up 8 minutes             g2
+827fdbc72e33   wxdlong/gluster   "/sbin/init"             8 minutes ago   Up 8 minutes             g1
+aab8788a8fbd   wxdlong/gluster   "/sbin/init"             8 minutes ago   Up 8 minutes             arbiter
+```
+
+## Command
 查看glusterd服务状态
 ```bash
 [root@g2 /]# systemctl status glusterd
@@ -79,7 +100,7 @@ performance.client-io-threads: off
 volume start: gv0: success
 ```
 
-mount volume `gv0` 到 `/mnt/glusterfs`
+在gc server上mount volume `gv0` 到 `/mnt/glusterfs`
 ```bash
 mount -t glusterfs -o backupvolfile-server=g2 g1:/gv0 /mnt/glusterfs
 ```
