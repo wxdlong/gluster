@@ -1,0 +1,54 @@
+version: '3'
+services:
+  arbiter:
+    build: .
+    image: wxdlong/gluster
+    hostname: arbiter
+    privileged: true
+    container_name: arbiter
+    tty: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    environment:
+      - NODE_TYPE=arbiter
+    
+
+
+  g1:
+    build: .
+    image: wxdlong/gluster
+    hostname: g1
+    privileged: true
+    container_name: g1
+    tty: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    environment:
+      - NODE_TYPE=gv
+  
+
+  g2:
+    build: .
+    image: wxdlong/gluster
+    hostname: g2
+    privileged: true
+    container_name: g2
+    tty: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    environment:
+      - NODE_TYPE=gv
+
+  gc:
+    build: .
+    image: wxdlong/gluster
+    hostname: gc
+    privileged: true
+    container_name: gc
+    tty: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    environment:
+      - NODE_TYPE=gc
+
+
